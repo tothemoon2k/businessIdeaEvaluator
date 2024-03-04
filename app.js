@@ -19,14 +19,12 @@ const { generatePrompt } = require('./helper/prompt');
 
 
 app.post('/evaluate', async (req, res) => {
-    res.send("Yuh") //chatCompletion.choices[0].message.content
-
     const chatCompletion = await openai.chat.completions.create({
         messages: [{ role: 'user', content: generatePrompt(req.body.businessIdea, req.body.checklists[0]) }],
         model: 'gpt-4',
     });
 
-    
+    res.send(chatCompletion.choices[0].message.content);
 })
 
 app.get('/', (req, res) => {
