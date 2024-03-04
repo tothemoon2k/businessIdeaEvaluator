@@ -1,0 +1,11 @@
+{
+  "name": "business-idea-evaluator",
+  "version": "1.0.0",
+  "description": "Objectivly evaluate your business ideas based on critera that mark winning ideas",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
