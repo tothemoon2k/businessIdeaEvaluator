@@ -15,19 +15,17 @@ const openai = new OpenAI({
 });
 
 //Prompt Helper Func
-const { generatePrompt } = require('./promptHelper');
+const { generatePrompt } = require('./helper/prompt');
 
 
 app.post('/evaluate', async (req, res) => {
     const chatCompletion = await openai.chat.completions.create({
-        messages: [{ role: 'user', content: generatePrompt(req.body.businessIdea) }],
+        messages: [{ role: 'user', content: generatePrompt(req.body.businessIdea, req.body.checklists[0]) }],
         model: 'gpt-4',
     });
 
-    console.log(chatCompletion.choices[0].message.content);
-    
-    res.send("Completed")
-  })
+    res.send(chatCompletion.choices[0].message.content)
+})
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
@@ -36,3 +34,5 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
+
+module.exports = app;
