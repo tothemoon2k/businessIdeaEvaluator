@@ -24,7 +24,7 @@ app.post('/evaluate', async (req, res) => {
         model: 'gpt-4',
     });
 
-    res.send(chatCompletion.choices[0].message.content)
+    res.send("Yuh") //chatCompletion.choices[0].message.content
 })
 
 app.get('/', (req, res) => {
