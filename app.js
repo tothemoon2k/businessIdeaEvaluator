@@ -6,7 +6,7 @@ const port = 3000;
 
 //Get Env Variables
 const path = require('path');
-require('dotenv').config({path: path.resolve(__dirname, '../.env')});
+require('dotenv').config();
 
 //Configure OpenAI
 const OpenAI = require('openai');
