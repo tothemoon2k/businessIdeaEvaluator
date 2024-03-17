@@ -32,71 +32,76 @@ app.post('/evaluate', async (req, res) => {
     res.send(chatCompletion.choices[0].message.content);
     */
 
-    res.send({ "checklists": [{ 
-      "items": [
-          {
-            "item": "Must solve a Painful Problem",
-            "passing_percentage": 85,
-            "passing": true,
-            "note": "This app aims to solve that problem by providing a convenient platform to connect with local, verified pet care professionals."
-          },
-          {               
-            "item": "Must solve a Painful Problem",
-            "passing_percentage": 80,
-            "passing": false,
-            "note": "This app aims to solve that problem by providing a convenient platform to connect with local, verified pet care professionals."
-          },
-          {
-            "item": "Must solve a Painful Problem",
-            "passing_percentage": 82,
-            "passing": true,
-            "note": "This app aims to solve that problem by providing a convenient platform to connect with local, verified pet care professionals."
-          },
-      ],
-      "items": [
+    res.send({
+      "checklists": [
         {
-          "item": "Must solve a Painful Problem",
-          "passing_percentage": 85,
-          "passing": true,
-          "note": "This app aims to solve that problem by providing a convenient platform to connect with local, verified pet care professionals."
-        },
-        {               
-          "item": "Must solve a Painful Problem",
-          "passing_percentage": 80,
-          "passing": false,
-          "note": "This app aims to solve that problem by providing a convenient platform to connect with local, verified pet care professionals."
+          "items": [
+            {
+              "item": "Must solve a Painful Problem",
+              "passing_percentage": 85,
+              "passing": true,
+              "note": "This app aims to solve that problem by providing a convenient platform to connect with local, verified pet care professionals."
+            },
+            {
+              "item": "Must solve a Painful Problem",
+              "passing_percentage": 80,
+              "passing": false,
+              "note": "This app aims to solve that problem by providing a convenient platform to connect with local, verified pet care professionals."
+            },
+            {
+              "item": "Must solve a Painful Problem",
+              "passing_percentage": 82,
+              "passing": true,
+              "note": "This app aims to solve that problem by providing a convenient platform to connect with local, verified pet care professionals."
+            }
+          ]
         },
         {
-          "item": "Must solve a Painful Problem",
-          "passing_percentage": 82,
-          "passing": true,
-          "note": "This app aims to solve that problem by providing a convenient platform to connect with local, verified pet care professionals."
+          "items": [
+            {
+              "item": "Must solve a Painful Problem",
+              "passing_percentage": 85,
+              "passing": true,
+              "note": "This app aims to solve that problem by providing a convenient platform to connect with local, verified pet care professionals."
+            },
+            {
+              "item": "Must solve a Painful Problem",
+              "passing_percentage": 80,
+              "passing": false,
+              "note": "This app aims to solve that problem by providing a convenient platform to connect with local, verified pet care professionals."
+            },
+            {
+              "item": "Must solve a Painful Problem",
+              "passing_percentage": 82,
+              "passing": true,
+              "note": "This app aims to solve that problem by providing a convenient platform to connect with local, verified pet care professionals."
+            }
+          ]
         },
-      ],
-      "items": [
         {
-          "item": "Must solve a Painful Problem",
-          "passing_percentage": 85,
-          "passing": true,
-          "note": "This app aims to solve that problem by providing a convenient platform to connect with local, verified pet care professionals."
-        },
-        {               
-          "item": "Must solve a Painful Problem",
-          "passing_percentage": 80,
-          "passing": false,
-          "note": "This app aims to solve that problem by providing a convenient platform to connect with local, verified pet care professionals."
-        },
-        {
-          "item": "Must solve a Painful Problem",
-          "passing_percentage": 82,
-          "passing": true,
-          "note": "This app aims to solve that problem by providing a convenient platform to connect with local, verified pet care professionals."
-        },
+          "items": [
+            {
+              "item": "Must solve a Painful Problem",
+              "passing_percentage": 85,
+              "passing": true,
+              "note": "This app aims to solve that problem by providing a convenient platform to connect with local, verified pet care professionals."
+            },
+            {
+              "item": "Must solve a Painful Problem",
+              "passing_percentage": 80,
+              "passing": false,
+              "note": "This app aims to solve that problem by providing a convenient platform to connect with local, verified pet care professionals."
+            },
+            {
+              "item": "Must solve a Painful Problem",
+              "passing_percentage": 82,
+              "passing": true,
+              "note": "This app aims to solve that problem by providing a convenient platform to connect with local, verified pet care professionals."
+            }
+          ]
+        }
       ]
-    }, 
-    
-    ] 
-  });
+    });
 })
 
 app.get('/', (req, res) => {
