@@ -18,6 +18,13 @@ const openai = new OpenAI({
     apiKey: process.env.OPENAI_KEY, // This is the default and can be omitted
 });
 
+const Anthropic = require('@anthropic-ai/sdk');
+
+const anthropic = new Anthropic({
+  apiKey: process.env.CLAUDE_KEY,
+});
+
+
 //Prompt Helper Func
 const { generatePrompt } = require('./helper/prompt');
 
@@ -32,76 +39,13 @@ app.post('/evaluate', async (req, res) => {
     res.send(chatCompletion.choices[0].message.content);
     */
 
-    res.send({
-      "checklists": [
-        {
-          "items": [
-            {
-              "item": "Must solve a Painful Problem",
-              "passing_percentage": 85,
-              "passing": true,
-              "note": "This app aims to solve that problem by providing a convenient platform to connect with local, verified pet care professionals."
-            },
-            {
-              "item": "Must solve a Painful Problem",
-              "passing_percentage": 80,
-              "passing": false,
-              "note": "This app aims to solve that problem by providing a convenient platform to connect with local, verified pet care professionals."
-            },
-            {
-              "item": "Must solve a Painful Problem",
-              "passing_percentage": 82,
-              "passing": true,
-              "note": "This app aims to solve that problem by providing a convenient platform to connect with local, verified pet care professionals."
-            }
-          ]
-        },
-        {
-          "items": [
-            {
-              "item": "Must solve a Painful Problem",
-              "passing_percentage": 85,
-              "passing": true,
-              "note": "This app aims to solve that problem by providing a convenient platform to connect with local, verified pet care professionals."
-            },
-            {
-              "item": "Must solve a Painful Problem",
-              "passing_percentage": 80,
-              "passing": false,
-              "note": "This app aims to solve that problem by providing a convenient platform to connect with local, verified pet care professionals."
-            },
-            {
-              "item": "Must solve a Painful Problem",
-              "passing_percentage": 82,
-              "passing": true,
-              "note": "This app aims to solve that problem by providing a convenient platform to connect with local, verified pet care professionals."
-            }
-          ]
-        },
-        {
-          "items": [
-            {
-              "item": "Must solve a Painful Problem",
-              "passing_percentage": 85,
-              "passing": true,
-              "note": "This app aims to solve that problem by providing a convenient platform to connect with local, verified pet care professionals."
-            },
-            {
-              "item": "Must solve a Painful Problem",
-              "passing_percentage": 80,
-              "passing": false,
-              "note": "This app aims to solve that problem by providing a convenient platform to connect with local, verified pet care professionals."
-            },
-            {
-              "item": "Must solve a Painful Problem",
-              "passing_percentage": 82,
-              "passing": true,
-              "note": "This app aims to solve that problem by providing a convenient platform to connect with local, verified pet care professionals."
-            }
-          ]
-        }
-      ]
+    const msg = await anthropic.messages.create({
+      model: "claude-3-opus-20240229",
+      max_tokens: 1024,
+      messages: [{ role: "user", content: generatePrompt(req.body.businessIdea, req.body.checklists[0]) }],
     });
+
+    res.send(msg.content);
 })
 
 app.get('/', (req, res) => {
