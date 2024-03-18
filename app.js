@@ -38,14 +38,15 @@ app.post('/evaluate', async (req, res) => {
 
     res.send(chatCompletion.choices[0].message.content);
     */
+    console.log(req.body.checklists)
 
     const msg = await anthropic.messages.create({
       model: "claude-3-opus-20240229",
       max_tokens: 1024,
-      messages: [{ role: "user", content: generatePrompt(req.body.businessIdea, req.body.checklists[0]) }],
+      messages: [{ role: "user", content: generatePrompt(req.body.businessIdea, req.body.checklists) }],
     });
 
-    res.send(msg.content);
+    res.send(msg.content[0].text);
 })
 
 app.get('/', (req, res) => {
