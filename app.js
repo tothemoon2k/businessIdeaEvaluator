@@ -1,5 +1,6 @@
 //Setup Express
 const express = require('express');
+const axios = require('axios');
 const cors = require('cors');
 const app = express();
 
@@ -47,6 +48,40 @@ app.post('/evaluate', async (req, res) => {
     });
 
     res.send(msg.content[0].text);
+})
+
+app.post('/sendmail', async (req, res) => {
+    console.log(req.body.email);
+    console.log(req.body.results);
+
+    let headers = {
+        'accept': 'application/json',
+        'api-key': process.env.BREVO_KEY,
+        'content-type': 'application/json'
+    };
+
+    let data = {
+        "sender": {
+           "name": "Homerun",
+           "email": "app@tryhomerun.io"
+        },
+        "to": [
+           {
+              "email": req.body.email,
+              "name": `${req.body.results}`
+           }
+        ],
+        "subject": "Here is your business idea evaluation",
+        "htmlContent": `Test`
+        };
+        axios.post('https://api.brevo.com/v3/smtp/email', data, { headers })
+           .then(async response => {
+                res.send(`Email sent successfully - ${response.data}`);
+           })
+           .catch(error => {
+                res.send(`Email sent failure`);
+                console.log(error);
+           });
 })
 
 app.get('/', (req, res) => {
