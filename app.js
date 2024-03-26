@@ -42,7 +42,7 @@ app.post('/evaluate', async (req, res) => {
     console.log(req.body.checklists)
 
     const msg = await anthropic.messages.create({
-      model: "claude-3-opus-20240229",
+      model: "claude-3-sonnet-20240229",
       max_tokens: 1024,
       messages: [{ role: "user", content: generatePrompt(req.body.businessIdea, req.body.checklists) }],
     });
@@ -52,6 +52,7 @@ app.post('/evaluate', async (req, res) => {
 
 app.post('/sendmail', async (req, res) => {
     console.log(req.body.email);
+    console.log(req.body.name)
     console.log(req.body.results);
 
     let headers = {
@@ -59,6 +60,8 @@ app.post('/sendmail', async (req, res) => {
         'api-key': process.env.BREVO_KEY,
         'content-type': 'application/json'
     };
+
+    //Add name and email to db
 
     let data = {
         "sender": {
@@ -68,11 +71,11 @@ app.post('/sendmail', async (req, res) => {
         "to": [
            {
               "email": req.body.email,
-              "name": `${req.body.results}`
+              "name": req.body.name
            }
         ],
         "subject": "Here is your business idea evaluation",
-        "htmlContent": `Test`
+        "htmlContent": `${req.body.results}`
         };
         axios.post('https://api.brevo.com/v3/smtp/email', data, { headers })
            .then(async response => {
