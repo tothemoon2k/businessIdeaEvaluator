@@ -1,6 +1,7 @@
+const minifier = require('string-minify');
 
 const generatePrompt = (idea, checklists) => {
-    return `
+    return minifier(`
         Please evaluate the following business idea based on each item in the following checklist. 
         Please be brutally honest, strictly objective, consider market crowdedness and do not give any false hope. Please return a JSON object with a passing percentage, pass or fail, note for each item. As well as overall pass or fail, overall summary, overall notes. Please return only the object and no explaination.
         Please return the object in this structure, please break up checklists array in the format they are passed in - ""{
@@ -45,7 +46,7 @@ const generatePrompt = (idea, checklists) => {
         
         Business Idea: ""${idea}""
         Checklists: ""${checklists}""
-    `
+    `)
 }
 
 module.exports = {

@@ -42,6 +42,8 @@ app.post('/evaluate', async (req, res) => {
     */
     console.log(req.body.checklists)
 
+    console.log(generatePrompt(req.body.businessIdea, req.body.checklists))
+
     const msg = await anthropic.messages.create({
       model: "claude-3-opus-20240229",
       max_tokens: 2000,
@@ -85,87 +87,62 @@ app.post('/sendmail', async (req, res) => {
         "subject": "Here is your business idea evaluation",
         "htmlContent": `
         <style>
-            *{
-                font-family: sans-serif;
-            }
+        * {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        box-sizing: border-box;
+        }
 
-            strong {
-                font-weight: bold; 
-            }
+        body {
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 20px;
+        }
 
-            em {
-                font-style: italic; 
-            }
+        h2 {
+        color: #333;
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 30px;
+        }
 
-            table {
-                background: #f5f5f5;
-                border-collapse: separate;
-                box-shadow: inset 0 1px 0 #fff;
-                font-size: 12px;
-                line-height: 24px;
-                text-align: left;
-                width: 800px;
-                margin-top: 30px;
-            }	
+        table {
+        background-color: #fff;
+        border-collapse: collapse;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        font-size: 14px;
+        line-height: 1.5;
+        margin: 30px auto;
+        max-width: 800px;
+        overflow: hidden;
+        width: 100%;
+        }
 
-            th {
-                background: url(https://jackrugile.com/images/misc/noise-diagonal.png), linear-gradient(#777, #444);
-                border-left: 1px solid #555;
-                border-right: 1px solid #777;
-                border-top: 1px solid #555;
-                border-bottom: 1px solid #333;
-                box-shadow: inset 0 1px 0 #999;
-                color: #fff;
-            font-weight: bold;
-                padding: 10px 15px;
-                position: relative;
-                text-shadow: 0 1px 0 #000;	
-            }
+        th {
+        background-color: #4CAF50;
+        color: #fff;
+        font-weight: 600;
+        padding: 12px 16px;
+        text-align: left;
+        }
 
-            th:first-child {
-                border-left: 1px solid #777;	
-                box-shadow: inset 1px 1px 0 #999;
-            }
+        td {
+        border-bottom: 1px solid #ddd;
+        padding: 12px 16px;
+        }
 
-            th:last-child {
-                box-shadow: inset -1px 1px 0 #999;
-            }
+        tr:last-child td {
+        border-bottom: none;
+        }
 
-            td {
-                border-right: 1px solid #fff;
-                border-left: 1px solid #e8e8e8;
-                border-top: 1px solid #fff;
-                border-bottom: 1px solid #e8e8e8;
-                padding: 10px 15px;
-                position: relative;
-                transition: all 300ms;
-            }
+        tr:nth-child(even) td {
+        background-color: #f2f2f2;
+        }
 
-            td:first-child {
-                box-shadow: inset 1px 0 0 #fff;
-            }	
-
-            td:last-child {
-                border-right: 1px solid #e8e8e8;
-                box-shadow: inset -1px 0 0 #fff;
-            }	
-
-            tr:nth-child(odd) td {
-                background: #f1f1f1;	
-            }
-
-            tr:last-of-type td {
-                box-shadow: inset 0 -1px 0 #fff; 
-            }
-
-            tr:last-of-type td:first-child {
-                box-shadow: inset 1px -1px 0 #fff;
-            }	
-
-            tr:last-of-type td:last-child {
-                box-shadow: inset -1px -1px 0 #fff;
-            }	
-            </style>
+        tr:hover td {
+        background-color: #e6e6e6;
+        }
+        </style>
         
         <h2>Here is your business idea evaluation:</h2>
 
