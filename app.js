@@ -40,14 +40,19 @@ app.post('/evaluate', async (req, res) => {
 
     res.send(chatCompletion.choices[0].message.content);
     */
-    console.log(req.body.checklists)
 
-    console.log(generatePrompt(req.body.businessIdea, req.body.checklists))
+    let formattedChecklists = "";
+    let count = 1;
+
+    for(checklist of req.body.checklists){
+        formattedChecklists = `${formattedChecklists} Checklist #${count}: ${checklist}`;
+        count++;
+    }
 
     const msg = await anthropic.messages.create({
       model: "claude-3-opus-20240229",
       max_tokens: 2000,
-      messages: [{ role: "user", content: generatePrompt(req.body.businessIdea, req.body.checklists) }],
+      messages: [{ role: "user", content: generatePrompt(req.body.businessIdea, formattedChecklists) }],
     });
 
     console.log(msg.content[0].text);

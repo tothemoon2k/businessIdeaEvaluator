@@ -3,7 +3,7 @@ const minifier = require('string-minify');
 const generatePrompt = (idea, checklists) => {
     return minifier(`
         Please evaluate the following business idea based on each item in the following checklist. 
-        Please be brutally honest, strictly objective, consider market crowdedness and do not give any false hope. Please return a JSON object with a passing percentage, pass or fail, note for each item. As well as overall pass or fail, overall summary, overall notes. Please return only the object and no explaination.
+        Please be brutally honest, strictly objective, consider market crowdedness and do not give any false hope. Please return a JSON object with a passing percentage, pass or fail, note for each item. Please return only the JSON object and no explanation.
         Please return the object in this structure, please break up checklists array in the format they are passed in - ""{
             "checklists": [
             {
@@ -39,14 +39,14 @@ const generatePrompt = (idea, checklists) => {
             ]
             }
             ],
-            "overall_passing": false,
-            "overall_summary": "Based on the provided checklists, a pet photo sharing website does not appear to be a strong business idea. While it could have some appeal to pet owners and animal lovers, it does not directly solve a major problem, may have limited profit potential, and could face significant competition from existing social media platforms. Additionally, the long-term growth prospects and potential for a big exit may be limited.",
-            "overall_notes": "While the idea of a pet photo sharing website could be a fun and entertaining platform for a niche audience, it may struggle to achieve long-term success and profitability due to the lack of a clear problem being solved, limited monetization opportunities, and competition from larger, established platforms. It may be worth exploring alternative ideas that address more significant pain points or have a clearer path to profitability and scalability.",
             }""
         
         Business Idea: ""${idea}""
-        Checklists: ""${checklists}""
+
+        ${testChecklists}
+        
     `)
+    //Checklists: ""${checklists}""
 }
 
 module.exports = {
