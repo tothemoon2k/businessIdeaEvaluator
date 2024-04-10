@@ -43,7 +43,7 @@ const generatePrompt = (idea, checklists) => {
         
         Business Idea: ""${idea}""
 
-        ${testChecklists}
+        ${checklists}
         
     `)
     //Checklists: ""${checklists}""
