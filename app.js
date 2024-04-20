@@ -20,10 +20,10 @@ const openai = new OpenAI({
 });
 
 const Anthropic = require('@anthropic-ai/sdk');
-
 const anthropic = new Anthropic({
   apiKey: process.env.CLAUDE_KEY,
 });
+
 
 
 //Prompt Helper Func
@@ -55,6 +55,7 @@ app.post('/evaluate', async (req, res) => {
       messages: [{ role: "user", content: generatePrompt(req.body.businessIdea, formattedChecklists) }],
     });
 
+    console.log(req.body.businessIdea);
     console.log(msg.content[0].text);
 
     res.send(msg.content[0].text);
